@@ -3,6 +3,7 @@
 Notes app with SwiftData.
 
 `ListView`
+
 <img src="https://github.com/maheshwaran01m/Notes/assets/102943217/9d88fb3e-e40f-4c05-803d-79f3e3d179cd" width=30% >
 
 `DetailView`
