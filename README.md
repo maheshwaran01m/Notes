@@ -1,6 +1,10 @@
 # Notes
 
-Notes app with SwiftData.
+Notes app:
+- SwiftUI
+- SwiftData
+- Create/Update
+- Delete
 
 `ListView`
 
