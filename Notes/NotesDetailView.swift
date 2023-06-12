@@ -11,12 +11,12 @@ import SwiftData
 struct NotesDetailView: View {
   
   @Environment(\.dismiss) var dismiss
-  @ObservedObject var viewModel: NotesDetailViewModel
+  @State var viewModel: NotesDetailViewModel
   
   var selectedItem: ((Item?) -> Void)?
   
   init(item: Item? = nil) {
-    self.viewModel = NotesDetailViewModel(item: item)
+    _viewModel = State(initialValue: NotesDetailViewModel(item: item))
   }
   
   var body: some View {
