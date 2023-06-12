@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import Observation
 
-class NotesDetailViewModel: ObservableObject {
+@Observable class NotesDetailViewModel {
   
   enum PriorityType: Int, CaseIterable {
     case low, medium, high, veryHigh
@@ -40,16 +41,16 @@ class NotesDetailViewModel: ObservableObject {
     }
   }
   
-  @Published var title = String()
-  @Published var desc = String()
-  @Published var startDate = Date()
-  @Published var priority: Int = 0
-  @Published var endDate = Date()
-  @Published var isCompleted: Bool = false
+  var title = String()
+  var desc = String()
+  var startDate = Date()
+  var priority: Int = 0
+  var endDate = Date()
+  var isCompleted: Bool = false
   
   let priorityType = PriorityType.allCases
   
-  private var item: Item?
+  private var item: Item? = nil
   
   init(item: Item? = nil) {
     guard let item else { return }
