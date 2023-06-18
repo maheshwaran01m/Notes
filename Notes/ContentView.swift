@@ -18,7 +18,7 @@ struct ContentView: View {
       
       List {
         ForEach(items) { item in
-         showDetailView(item)
+          showDetailView(item)
         }
         .onDelete(perform: deleteItems)
       }
