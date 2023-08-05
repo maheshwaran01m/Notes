@@ -17,7 +17,7 @@ struct ContentView: View {
   
   private var filteredRecords: [Item] {
     guard !searchText.isEmpty else { return items }
-    let searchKeyPaths: [KeyPath<Item, String>] = [\.title]
+    let searchKeyPaths: [KeyPath<Item, String>] = [\.title, \.privateID]
     return items.filter { item in
       searchKeyPaths.compactMap { item[keyPath: $0] }.first(where: { $0.lowercased().localizedCaseInsensitiveContains(searchText) }) != nil
     }
