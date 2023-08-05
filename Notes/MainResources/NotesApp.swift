@@ -14,9 +14,7 @@ struct NotesApp: App {
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .onAppear {
-          print("Path: \(URL.libraryDirectory)")
-        }
+      let _ = print("Path: \(URL.libraryDirectory)")
     }
     .modelContainer(for: Item.self, isUndoEnabled: true)
   }
