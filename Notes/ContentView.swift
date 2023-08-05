@@ -11,32 +11,85 @@ import SwiftData
 struct ContentView: View {
   
   @Environment(\.modelContext) private var modelContext
-  @Query(sort: \.title, order: .forward, animation: .spring) private var items: [Item]
+  @Query(sort: \Item.title, order: .forward) private var items: [Item]
+  
+  @State private var searchText = ""
+  
+  private var filteredRecords: [Item] {
+    guard !searchText.isEmpty else { return items }
+    let searchKeyPaths: [KeyPath<Item, String>] = [\.title]
+    return items.filter { item in
+      searchKeyPaths.compactMap { item[keyPath: $0] }.first(where: { $0.lowercased().localizedCaseInsensitiveContains(searchText) }) != nil
+    }
+  }
   
   var body: some View {
     NavigationStack {
-      
-      List {
-        ForEach(items) { item in
-          showDetailView(item)
-        }
-        .onDelete(perform: deleteItems)
-      }
-      
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          EditButton()
-        }
-        ToolbarItem() {
-          NavigationLink {
-            createNewItem()
-          } label: {
-            Image(systemName: "plus")
-          }
-        }
-      }
-      .navigationTitle("Notes")
+      mainView
+        .searchable(text: $searchText)
+        .navigationTitle("Notes")
     }
+  }
+  
+  @ViewBuilder
+  private var mainView: some View {
+    if !filteredRecords.isEmpty {
+      listView
+    } else {
+      placeholderView
+    }
+  }
+  
+  private var listView: some View {
+    List {
+      ForEach(filteredRecords) { item in
+        showDetailView(item)
+      }
+      .onDelete(perform: deleteItems)
+    }
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        EditButton()
+      }
+      ToolbarItem() {
+        NavigationLink {
+          createNewItem()
+        } label: {
+          Image(systemName: "plus")
+        }
+      }
+    }
+  }
+}
+
+// MARK: - Placeholder View
+
+extension ContentView {
+  
+  private var placeholderView: some View {
+    ZStack {
+      Color.secondary.opacity(0.1)
+      VStack(spacing: 16) {
+        iconView
+        titleView
+      }
+    }
+    .ignoresSafeArea(.container, edges: .bottom)
+  }
+  
+  private var titleView: some View {
+    Text("No Items")
+      .font(.title3)
+      .frame(minHeight: 22)
+      .multilineTextAlignment(.center)
+      .foregroundStyle(.secondary)
+  }
+  
+  private var iconView: some View {
+    Image(systemName: "square.on.square.badge.person.crop")
+      .font(.title3)
+      .foregroundStyle(Color.secondary)
+      .frame(minWidth: 20, minHeight: 20)
   }
 }
 
