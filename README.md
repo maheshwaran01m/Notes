@@ -8,7 +8,7 @@ Notes app:
 
 `ListView`
 
-<img src="https://github.com/maheshwaran01m/Notes/assets/102943217/9d88fb3e-e40f-4c05-803d-79f3e3d179cd" width=30% >
+<img src="https://github.com/maheshwaran01m/Notes/assets/102943217/3ed35324-550a-4be8-b78a-c4811cb663ea" width=30% >
 
 `DetailView`
 
@@ -17,3 +17,7 @@ Notes app:
 `Delete`
 
 <img src="https://github.com/maheshwaran01m/Notes/assets/102943217/8b7a5b27-fefd-439d-bc75-2bc4fdb66c45" width=30% >
+
+`Search`
+
+<img src="https://github.com/maheshwaran01m/Notes/assets/102943217/21b035cc-4ba5-4570-9b19-0a5ad65da295" width=30% >
