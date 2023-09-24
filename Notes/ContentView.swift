@@ -26,6 +26,7 @@ struct ContentView: View {
   var body: some View {
     NavigationStack {
       mainView
+        .toolbar(content: toolBarContent)
         .searchable(text: $searchText)
         .navigationTitle("Notes")
     }
@@ -47,16 +48,19 @@ struct ContentView: View {
       }
       .onDelete(perform: deleteItems)
     }
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        EditButton()
-      }
-      ToolbarItem() {
-        NavigationLink {
-          createNewItem()
-        } label: {
-          Image(systemName: "plus")
-        }
+  }
+  
+  @ToolbarContentBuilder
+  private func toolBarContent() -> some ToolbarContent {
+    ToolbarItem(placement: .topBarTrailing) {
+      EditButton()
+    }
+    
+    ToolbarItem(placement: .topBarTrailing) {
+      NavigationLink {
+        createNewItem()
+      } label: {
+        Image(systemName: "plus")
       }
     }
   }
